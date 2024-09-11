@@ -12,6 +12,7 @@
       <link rel="stylesheet" href="assets/css/animate.min.css">
       <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
       <link rel="shortcut icon" href="public/images/favicon.ico">
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
       <!-- CSS -->
        <link rel="stylesheet" href="/assets/css/new.css">
       <title>NFT marketplace template collection to start your own web marketplace.</title>
@@ -32,6 +33,26 @@
       <meta name="robots" content="noindex,nofollow">
    </head>
    <body>
+
+      <div id="walletModal" class="modal">
+         <div class="modal-content">
+             <span id="close-popup" class="close">&times;</span>
+             <div id="metamaskOption" class="wallet-option">
+                 <img src="/assets/img/metamask.svg" alt="MetaMask">
+                 <div>
+                     <p>MetaMask</p>
+                     <span>Connect to your MetaMask Wallet</span>
+                 </div>
+             </div>
+             <div id="walletConnectOption" class="wallet-option">
+                 <img src="/assets/img/wallet connect.svg" alt="WalletConnect">
+                 <div>
+                     <p>WalletConnect</p>
+                     <span>Scan with WalletConnect to connect</span>
+                 </div>
+             </div>
+         </div>
+     </div>
       <!-- header main -->
       <header class="header-main">
          <div class="container">
@@ -45,41 +66,29 @@
                   <div class="header-menu-box clearfix">
                      <div class="header-navbar-menu clearfix">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                           <i class="fas fa-bars"></i>
-                           <!-- </button>
-                           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                              <ul class="navbar-nav mr-auto">
-                                 <li class="nav-item menu-menu-parent">
-                                    <a class="nav-link" href="https://theme.bitrixinfotech.com/nft-marketplace/browse.html">Browse</a>
-                                 </li>
-                                 
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://theme.bitrixinfotech.com/nft-marketplace/min-item.html">Create an item</a>
-                                 </li>
-                                 
-                                 <li class="nav-item single-menu">
-                                    <a class="nav-link" href="JavaScript:void(0)">Categories <i class="fas fa-sort-down"></i></a>
-                                    <div class="dropdown-box">
-                                       <ul class="dropdown-box-inner">
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/art.html">Art</a></li>
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/collectibles.html">Collectibles</a></li>
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/game-items.html">Game Items</a></li>
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/music.html">Music</a></li>
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/domains.html">Domains</a></li>
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/templates.html">Templates</a></li>
-                                          <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/videos.html">Videos</a></li>
-                                       </ul>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div> -->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto d-flex">
+                                    <!-- Browse Button (Visible only on small screens) -->
+                                    <li class="nav-item menu-menu-parent d-lg-none">
+                                        <a href="" class="theme-btn2" href="">Smart Contract</a>
+                                    </li>
+                    
+                                    <!-- Create an Item Button (Visible only on small screens) -->
+                                    <li class="nav-item d-lg-none">
+                                        <button id="connectWalletBtn2" class="theme-btn2">Connect Wallet</button>
+                                    </li>
+                                </ul>
+                            </div>
                         </nav>
-                     </div>
+                    </div>
+                    
                      <div class="header-right-btn">
                         <ul>
-                           <li><a class="theme-btn" href="">Login</a></li>
-                           <li><button class="theme-btn" >Connect Wallet</button></li>
+                           <li><a href="" class="theme-btn" href="">Smart Contract</a></li>
+                           <li><button id="connectWalletBtn" class="theme-btn" >Connect Wallet</button></li>
                         </ul>
                      </div>
                   </div>
@@ -119,7 +128,7 @@
                      </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                     <img src="" alt="">
+                     <img src="/public/images/bg.png" alt="">
                     
                   </div>
                </div>
@@ -127,19 +136,19 @@
          </div>
       </section>
 
-      <div class="container">
+      <div class="containers">
          <!-- Card 1 -->
-         <div class="card" >
-           <h2>Product 1</h2>
-           <p>This is the description for the first product. It’s an amazing item that has many great features.</p>
-           <p class="price">$49.99</p>
+         <div class="cards" >
+           <h2>Contract Balance</h2>
+
+           <p id="contract-balance" class="price">0.000</p>
          </div>
        
          <!-- Card 2 -->
          <div class="cards" >
-           <h2>Product 2</h2>
-           <p>This is the description for the second product. It offers excellent value for its price.</p>
-           <p class="price">$59.99</p>
+           <h2>Total withdrawn</h2>
+        
+           <p id= "withdrawandata">0.00</p>
          </div>
        
          <!-- Card 3 -->
@@ -154,258 +163,84 @@
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="section-title text-center">
                      <span>Current Contract Balance</span>
-                     <h2 id="Contract-balance" data-watermark="Items">0.005</h2>
+                     <h2 id="contract-balance2" data-watermark="Items">0.005</h2>
                      <div class="em_bar">
                         <div class="em_bar_bg"></div>
                      </div>
-                     <p class="subtitle">Explore the newly listed remarkable NFTs on NFTLand, choose the best one, and place your bid to purchase it.</p>
+               
                   </div>
                </div>
             </div>
+
             <div class="row">
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-1.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">15 minutes left</span>
-                           </span>
-                        </div>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">Deposit</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Scarecrow in daylight</a></h3>
-                        <h4>0.2 ETH <span>1/1</span></h4>
-                        <div class="nft-highest-bid"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Place a bid</a></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 88</span>
-                        </div>
+                        <h3 id="total-deposits" class="theme-title text-center">0.000</h3>
+                        <h4 class="text-center">BNB </h4>
+                        
                      </div>
                   </div>
                </div>
+
+
+
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-2.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">Users</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Mortimer Crypto Mystic</a></h3>
-                        <h4>0.2 ETH <span>5/5</span></h4>
-                        <div class="nft-highest-bid"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Place a bid</a></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 10</span>
-                        </div>
+                        <h3 id="total-users" class="theme-title text-center">0</h3>
+                        <h4 class="text-center">-</h4>
+                        
                      </div>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items nfts-multiple">
-                     <span class="multiple-layer"></span>
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-3.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Bored Ape Yacht Club</a></h3>
-                        <h4>From 0.01 ETH <span>74/397</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative"><span>Bid 0.003 wETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 03</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items nfts-multiple">
-                     <span class="multiple-layer"></span>
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-4.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">an hour left</span>
-                           </span>
-                        </div>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Scarecrow in daylight</a></h3>
-                        <h4>From 0.005 ETH <span>27/30</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative"><span>Bid ~0.001 wETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 08</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-5.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">withdrawn</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Twilight Fracture City</a></h3>
-                        <h4>Minimum bid <span>1/1</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative"><span>0.15 wETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 80</span>
-                        </div>
+                        <h3 id="withdrawandata2" class="theme-title text-center">0.000</h3>
+                        <h4 class="text-center">BNB </h4>
+                        
                      </div>
                   </div>
                </div>
+
+               
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-6.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">Ref Reward</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Darklight Angel 01</a></h3>
-                        <h4>0.5 ETH <span>10/10</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative">Highest bid <span>0.004 ETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 100</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-7.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Saphyre Cryptobug</a></h3>
-                        <h4>0.5 ETH <span>10/10</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative">Highest bid <span>0.004 ETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 30</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-8.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Resonate Sanctuary II</a></h3>
-                        <h4>0.5 ETH <span>10/10</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative">Highest bid <span>0.004 ETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 45</span>
-                        </div>
+                        <h3 id="ref-rewards" class="theme-title text-center">0.000</h3>
+                        <h4 class="text-center">BNB </h4>
+                        
                      </div>
                   </div>
                </div>
             </div>
+            
          </div>
       </section>
       <!-- promisional -->
@@ -416,40 +251,63 @@
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="earn-main-box">
                      <div class="earn-images earn-about-images">
-                        <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/about.png" alt="">
+                        <img src="/public/images/bg.png  " alt="">
                         <div class="about-eth-coin">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/eth-coin.png" alt="">
+                           <img src="/public/images/bg.png" alt="">
                         </div>
                      </div>
                      <div class="earn-images earn-about-responsive">
-                        <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/about-responsive.png" alt="">
+                        <img src="/public/images/bg.png" alt="">
                      </div>
                      <div class="earn-info">
-                        <span>About</span>
-                        <h2>Marketplace - Discover NFTs</h2>
-                        <p class="theme-description">Unique NFTs - Digital Collectibles - may be found on this fresh new futuristic NFT platform.</p>
+                        <span>Make New</span>
+                        <div class="deposit-form">
+                          <div class="input-group">
+                            <input id="depositAmount" type="number" class="deposit-input" min="0.05" max="1000" step="0.01">
+                            <span class="currency">BNB</span>
+                          </div>
+                          <button id="sendTransaction" class="deposit-btn">Make Deposit</button>
+                        </div>
+                        <div class="deposit-limits">
+                          <p>* minimum 0.05 BNB</p>
+                          <p>** maximum 1000 BNB</p>
+                        </div>
                         <div class="em_bar">
                            <div class="em_bar_bg"></div>
                         </div>
                         <div class="singel-about-box">
                            <div class="singel-about-box-item clearfix">
                               <div class="singel-about-box-icon">
-                                 <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/nft/nft_governance.png" alt="NFT-Governance-image">
+                                 <img src="/public/images/bg.png" alt="NFT-Governance-image">
                               </div>
                               <div class="singel-about-box-info">
-                                 <h3 class="theme-title">Explore NFTs</h3>
-                                 <p class="theme-description">NFTs include digital items such as visual arts, music, games, and video that are very unique.</p>
+                                 <h3 class="theme-title">Per Day</h3>
+                                 <p class="theme-title">0.000</p>
                               </div>
                            </div>
                            <div class="singel-about-box-item clearfix">
                               <div class="singel-about-box-icon">
-                                 <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/nft/super_nft.png" alt="Super-NFT-image">
+                                 <img src="/public/images/bg.png" alt="NFT-Governance-image">
                               </div>
                               <div class="singel-about-box-info">
-                                 <h3 class="theme-title">Buy & Sell NFTs</h3>
-                                 <p class="theme-description">Sell your NFTs (digital collectibles) and earn in crypto, also buy NFTs with smart contracts. </p>
+                                 <h3 class="theme-title">Percent Rate</h3>
+                                 <p class="theme-title">3% Per Day</p>
                               </div>
                            </div>
+                           </div>
+                           <div class="singel-about-box-item clearfix mt-4">
+                              <div class="singel-about-box-item clearfix">
+                                 <div class="singel-about-box-icon">
+                                    <img src="/public/images/bg.png" alt="NFT-Governance-image">
+                                 </div>
+                                 <div class="singel-about-box-info">
+                                    <h3 class="theme-title">Totql income</h3>
+                                    <p class="theme-title">0.000</p>
+                                    <p class="text-white">*Withdrawal at any time you want!</p>
+                                 </div>
+                              </div>
+                           </div>
+                           
                         </div>
                      </div>
                   </div>
@@ -464,272 +322,117 @@
             <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="section-title text-center">
-                     <span>Items</span>
-                     <h2 data-watermark="Items">Items Viewed The Most</h2>
+                     <span>Your Income</span>
+                     <h2 id="depositUser" data-watermark="Items">0.000</h2>
+                     <p class="text-white">Withdrawable balance</p>
                      <div class="em_bar">
                         <div class="em_bar_bg"></div>
                      </div>
-                     <p class="subtitle">You can see the best and most viewed items; from all categories, we have a wide range of items available on our marketplace.</p>
+                   <button id="withdraw-button" class="theme-btn">Withdrawal</button>
                   </div>
                </div>
             </div>
+
+            
+
             <div class="row">
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-1.jpg" alt=""></a>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">User Deposits</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Scarecrow in daylight</a></h3>
-                        <h4>0.2 ETH <span>1/1</span></h4>
-                        <div class="nft-highest-bid"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Place a bid</a></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 20</span>
-                        </div>
+                        <h3 id="userDeposits" class="theme-title text-center">0.000</h3>
+                        <h4 class="text-center">BNB </h4>
+                        
                      </div>
                   </div>
                </div>
+
+
+
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-2.jpg" alt=""></a>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">User Profit</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Mortimer Crypto Mystic</a></h3>
-                        <h4>0.2 ETH <span>5/5</span></h4>
-                        <div class="nft-highest-bid"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Place a bid</a></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 40</span>
-                        </div>
+                        <h3 id="profit" class="theme-title text-center">0.000</h3>
+                        <h4 class="text-center">BNB</h4>
+                        
                      </div>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items nfts-multiple">
-                     <span class="multiple-layer"></span>
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-3.jpg" alt=""></a>
-                        <div class="nft-item-time">
-                           <span class="card__time card__time--clock">
-                              <i class="fas fa-clock"></i><span class="card__clock card__clock--2">14:07:47</span>
-                           </span>
-                        </div>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Bored Ape Yacht Club</a></h3>
-                        <h4>From 0.01 ETH <span>74/397</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative"><span>Bid 0.003 wETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 80</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items nfts-multiple">
-                     <span class="multiple-layer"></span>
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-4.jpg" alt=""></a>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Scarecrow in daylight</a></h3>
-                        <h4>From 0.005 ETH <span>27/30</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative"><span>Bid ~0.001 wETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 50</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-5.jpg" alt=""></a>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">Amount Withdrawn</h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Twilight Fracture City</a></h3>
-                        <h4>Minimum bid <span>1/1</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative"><span>0.15 wETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 10</span>
-                        </div>
+                        <h3 id="amountWithdrawn" class="theme-title text-center">0.000</h3>
+                        <h4 class="text-center">BNB </h4>
+                        
                      </div>
                   </div>
                </div>
+
+               
                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                   <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-6.jpg" alt=""></a>
-                     </div>
+                  
                      <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
+                        <h3 class="theme-title text-center">Interest Rate
+                        </h3>
+                      
+                     
                      </div>
                      <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Darklight Angel 01</a></h3>
-                        <h4>0.5 ETH <span>10/10</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative">Highest bid <span>0.004 ETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 02</span>
-                        </div>
+                        <h3 id="interestRate" class="theme-title text-center">3%</h3>
+                        <h4 class="text-center">Per Day</h4>
+                        
                      </div>
                   </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-7.jpg" alt=""></a>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Saphyre Cryptobug</a></h3>
-                        <h4>0.5 ETH <span>10/10</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative">Highest bid <span>0.004 ETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 60</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-                  <div class="nft-items">
-                     <div class="nft-items-media">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/category/category-8.jpg" alt=""></a>
-                     </div>
-                     <div class="nft-items-authore clearfix">
-                        <div class="hot-bids-athore clearfix">
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Collection : Onem"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user1.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Owner: Tocaya"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user2.png" alt=""></a>
-                           <a href="#" class="btn btn-lg" data-toggle="tooltip" data-placement="top" title="Creator: Georgijevic"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/user3.png" alt=""></a>
-                        </div>
-                        <div class="nft-items-like">
-                           <span><i class="far fa-heart"></i> 400</span>
-                        </div>
-                     </div>
-                     <div class="nft-items-info">
-                        <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Resonate Sanctuary II</a></h3>
-                        <h4>0.5 ETH <span>10/10</span></h4>
-                        <div class="nft-highest-bid btn btn-lg" data-toggle="tooltip" data-placement="top" title="Highest bid by generative">Highest bid <span>0.004 ETH</span></div>
-                        <div class="nft-views">
-                           <span><i class="far fa-eye"></i> 55</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="bid-shape">
-                  <svg viewBox="0 0 300 322">
-                     <defs>
-                        <linearGradient id="gradient-3" gradientTransform="rotate(90)">
-                           <stop offset="5%" stop-color="rgba(233,244,255,0)"></stop>
-                           <stop offset="95%" stop-color="rgba(233,244,255,1)"></stop>
-                        </linearGradient>
-                     </defs>
-                     <path fill="url(#gradient-2)" d="M300,196.58v-71.16c0-31.57-16.84-60.75-44.19-76.53l-61.63-35.58c-27.34-15.79-61.03-15.79-88.37,0 L44.19,48.89C16.84,64.67,0,93.85,0,125.42v71.16c0,31.57,16.84,60.75,44.19,76.53l61.63,35.58c27.34,15.79,61.03,15.79,88.37,0 l61.63-35.58C283.16,257.33,300,228.15,300,196.58z"></path>
-                  </svg>
                </div>
             </div>
+            
          </div>
       </section>
       <!-- most viewed -->
       <!-- earn area -->
+       <h2 class="text-center text-white">Referral</h2>
       <section class="earn-area page-paddings">
          <div class="container">
             <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="earn-main-box">
                      <div class="earn-info">
-                        <span>Platform For Artists</span>
-                        <h2>Digital Arts on NFT Platform</h2>
-                        <div class="em_bar">
-                           <div class="em_bar_bg"></div>
+                        <h3>Your Link</h3>
+                        <div class="link-container">
+                          <span id="referralLink">https://tronz.pro/bnb/a/Plan3/example.pro/</span>
+                          <button id="copyButton" class="copy-btn">Copy</button>
                         </div>
-                        <p class="theme-description">Join the all-new NFTs marketplace if you're a musician, videographer, or visual artist.</p>
-                        <div class="singel-about-box">
-                           <div class="singel-about-box-item clearfix">
-                              <div class="singel-about-box-icon">
-                                 <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/nft/nft_governance.png" alt="NFT-Governance-image">
-                              </div>
-                              <div class="singel-about-box-info">
-                                 <h3 class="theme-title">List Your Items</h3>
-                                 <p class="theme-description">You can list your NFTs, either at a fixed price or in an auction, using a streamlined process.</p>
-                              </div>
-                           </div>
-                           <div class="singel-about-box-item clearfix">
-                              <div class="singel-about-box-icon">
-                                 <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/nft/super_nft.png" alt="Super-NFT-image">
-                              </div>
-                              <div class="singel-about-box-info">
-                                 <h3 class="theme-title">Create Your store</h3>
-                                 <p class="theme-description">You can use this site to not only list your NFTs, but also to establish your own store and brand.</p>
-                              </div>
-                           </div>
+                        <div class="rewards">
+                          <div class="reward">
+                            <p>Total Reward</p>
+                            <h4 id="depositvalue">0.000</h4>
+                          </div>
+                          <div class="referral">
+                            <p>Total Referral</p>
+                            <h4 id="countdownline">0</h4>
+                          </div>
                         </div>
-                     </div>
+                      </div>
+                      
                      <div class="earn-images platform-artist-images">
                         <div class="platform-artist-left">
                            <div class="platform-artist-box">
@@ -758,310 +461,80 @@
             </div>
          </div>
       </section>
-      <!-- earn area -->
-      <!-- earn area -->
-      <section class="earn-area pb-5">
+
+      
+      <section class="most-viewed-items-area page-paddings">
          <div class="container">
-            <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="earn-main-box">
-                     <div class="earn-images list-sell-box">
-                        <div class="list-sell-top-img">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/list-and-sell/screen-top.png" alt="">
-                        </div>
-                        <div class="list-sell-token">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/list-and-sell/token.png" alt="">
-                        </div>
-                        <!-- <div class="list-sell-coin">
-                           <img src="public/images/list-and-sell/coin.png" alt="">
-                        </div> -->
-                        <img class="list-sell-img" src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/list-and-sell/screen.png" alt="">
+             <div class="row">
+                 <!-- Box 1: User Deposits -->
+                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="nft-items">
+                         <div class="nft-items-authore clearfix">
+                             <h3 class="theme-title text-center">0</h3>
+                         </div>
+                         <div class="nft-items-info">
+                             <h3 class="theme-title text-center space ">LVL5 <span>7%</span></h3>
+                          
+                         </div>
                      </div>
-                     <div class="list-earn-images-responsive">
-                        <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/earn-listing-img.png" alt="">
+                 </div>
+                 <!-- Box 2: User Profit -->
+                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="nft-items">
+                         <div class="nft-items-authore clearfix">
+                             <h3 class="theme-title text-center"> 0</h3>
+                         </div>
+                         <div class="nft-items-info">
+                           <h3 class="theme-title text-center space ">LVL4 <span>3%</span></h3>
+                           <h4 class="text-center"></h4>
+                         </div>
                      </div>
-                     <div class="earn-info">
-                        <h2>Begin listing and selling</h2>
-                        <div class="em_bar">
-                           <div class="em_bar_bg"></div>
-                        </div>
-                        <p class="theme-description">You are simply one click away from listing your NFT on our site and selling them for a lot of money.</p>
-                        <p class="theme-description">Put your NFTS up for auction or for sale at a predetermined price. Acquire feedback from viewers, purchase NFTs, collect one-of-a-kind things, and resell them.</p>
-                        <div class="earn-btn">
-                           <a class="theme-btn" href="https://theme.bitrixinfotech.com/nft-marketplace/browse.html">List Your NFT <i class="fas fa-arrow-right"></i></a>
-                        </div>
+                 </div>
+                 <!-- Box 3: Amount Withdrawn -->
+                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="nft-items">
+                         <div class="nft-items-authore clearfix">
+                             <h3 class="theme-title text-center">0 </h3>
+                         </div>
+                         <div class="nft-items-info">
+                           <h3 class="theme-title text-center space ">LVL3 <span>2%</span></h3>
+                           <h4 class="text-center"></h4>
+                         </div>
                      </div>
-                  </div>
-               </div>
-            </div>
+                 </div>
+                 <!-- Box 4: Interest Rate -->
+                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="nft-items">
+                         <div class="nft-items-authore clearfix">
+                             <h3 class="theme-title text-center">0 </h3>
+                         </div>
+                         <div class="nft-items-info">
+                           <h3 class="theme-title text-center space ">LVL4 <span>2%</span></h3>
+                           <h4 class="text-center"></h4>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- Box 5: Referral Bonus (new) -->
+                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="nft-items">
+                         <div class="nft-items-authore clearfix">
+                             <h3 class="theme-title text-center">0</h3>
+                         </div>
+                         <div class="nft-items-info">
+                           <h3 class="theme-title text-center space ">LVL5 <span>1%</span></h3>
+                           <h4 class="text-center"></h4>
+                         </div>
+                     </div>
+                 </div>
+             </div>
          </div>
-      </section>
-      <!-- earn area -->
-      <!-- top selling -->
-      <section class="top-selling-store page-background">
-         <div class="container">
-            <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="section-title text-center">
-                     <span>Items</span>
-                     <h2 data-watermark="Items">Best Selling Items</h2>
-                     <div class="em_bar">
-                        <div class="em_bar_bg"></div>
-                     </div>
-                     <p class="subtitle">You can see best-selling items; from all categories, buy from the wide range of items available on our marketplace.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling1.jpg" alt="Catagory-domain-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Ateali.Eth</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling2.jpg" alt="Catagory-game-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Indoor Football Table Game</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling3.jpg" alt="Catagory-game-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Bowling Ball With Colorful Bottles</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling4.jpg" alt="Catagory-music-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">The Modern Trap Music Collection</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling5.jpg" alt="Catagory-template-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Get Best Template Here</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling6.jpg" alt="Catagory-template-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Make Your Site/App Look Great</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling7.jpg" alt="Catagory-template-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">You Can Get Templates For Your Project</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 top-selling-width">
-                  <div class="item-group">
-                     <div class="item-group-content">
-                        <div class="item-group-avtar">
-                           <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/selling8.jpg" alt="Catagory-template-art-piece-image">
-                        </div>
-                        <div class="selling-item-info">
-                           <h3 class="theme-title"><a href="https://theme.bitrixinfotech.com/nft-marketplace/view-detail.html">Easy To Implement Tempalte For Your Site</a></h3>
-                           <p class="theme-description">Items sold: <span>566</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="bid-shape">
-                  <svg viewBox="0 0 300 322">
-                     <defs>
-                        <linearGradient id="gradient-1" gradientTransform="rotate(90)">
-                           <stop offset="5%" stop-color="rgba(233,244,255,0)"></stop>
-                           <stop offset="95%" stop-color="rgba(233,244,255,1)"></stop>
-                        </linearGradient>
-                     </defs>
-                     <path fill="url(#gradient-2)" d="M300,196.58v-71.16c0-31.57-16.84-60.75-44.19-76.53l-61.63-35.58c-27.34-15.79-61.03-15.79-88.37,0 L44.19,48.89C16.84,64.67,0,93.85,0,125.42v71.16c0,31.57,16.84,60.75,44.19,76.53l61.63,35.58c27.34,15.79,61.03,15.79,88.37,0 l61.63-35.58C283.16,257.33,300,228.15,300,196.58z"></path>
-                  </svg>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="page-btn text-center" style="margin-top: 50px;">
-                     <button class="theme-btn">Show More <i class="fas fa-arrow-right"></i></button>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- top selling -->
-      <!-- mintable guides -->
-      <section class="mintable-guides-area page-paddings">
-         <div class="container">
-            <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="section-title text-center">
-                     <span>Guides</span>
-                     <h2 data-watermark="Guides">Guides For NFTLand</h2>
-                     <div class="em_bar">
-                        <div class="em_bar_bg"></div>
-                     </div>
-                     <p class="subtitle">Get to know how to use NFTLand - Marketplace, how to sell or buy, and how to create your store on our platform.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                  <div class="mintable-guides-box text-center">
-                     <div class="mintable-guides-media">
-                        <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/mintale1.png" alt="Why-NFT">
-                     </div>
-                     <div class="mintable-guides-info">
-                        <h3 class="theme-title">What Are NFTs?</h3>
-                        <p class="theme-description">NFTs (non-fungible tokens) that exist on the blockchain as cryptocurrencies, and each NFTs has its own token value.</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                  <div class="mintable-guides-box text-center">
-                     <div class="mintable-guides-media">
-                        <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/mintale3.png" alt="Sell-Items-NFT">
-                     </div>
-                     <div class="mintable-guides-info">
-                        <h3 class="theme-title">Method To List Items?</h3>
-                        <p class="theme-description">To list your NFT, just establish an account, link your wallet, and provide the basic information about the item.</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                  <div class="mintable-guides-box text-center">
-                     <div class="mintable-guides-media">
-                        <img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/mintale2.png" alt="Digital-Store-NFT">
-                     </div>
-                     <div class="mintable-guides-info">
-                        <h3 class="theme-title">Method Of Selling?</h3>
-                        <p class="theme-description">It's critical to give more descriptive details and demonstrate how unique digital products are when selling any NFT.</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
+     </section>
+     
+     
       <!-- mintable guides -->
       <!-- footer -->
       <footer class="footer-main">
          <div class="footer-top">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12">
-                     <div class="footer-widget">
-                        <a href="https://theme.bitrixinfotech.com/nft-marketplace/index.html"><img src="https://theme.bitrixinfotech.com/nft-marketplace/public/images/logo-white.png" alt=""></a>
-                        <p class="theme-description">Find, Buy, and Sell Amazing Digital Items On One Platform With The All-New Non-Fungible Tokens (NFTs) Marketplace.</p>
-                        <p class="theme-description email-text mt-2">Email: <a href="mailto:yourname@yourdomain.com">yourname@yourdomain.com</a></p>
-                        <div class="footer-links clearfix">
-                           <div class="footer-icon-box">
-                              <a href="#" title="Facebook" >
-                              <i class="fab fa-facebook-f"></i>
-                              </a>
-                           </div>
-                           <div class="footer-icon-box">
-                              <a href="#" title="Twitter" >
-                              <i class="fab fa-twitter"></i>
-                              </a> 
-                           </div>
-                           <div class="footer-icon-box">
-                              <a href="#" title="Linkedin" >
-                              <i class="fab fa-linkedin-in"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-12">
-                     <div class="footer-widget">
-                        <h3 class="theme-title">My account</h3>
-                        <div class="footer-menu-services">
-                           <ul class="menu-service-menu">
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/create-store.html">Create a Store</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/min-item.html">List an Item for sale</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/login.html">My Profile</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-12">
-                     <div class="footer-widget">
-                        <h3 class="theme-title">Need Help?</h3>
-                        <div class="footer-menu-services">
-                           <ul class="menu-service-menu">
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/contact.html">Help and support</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/faq.html">FAQ</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/contact.html">Contact us</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/go-pro.html">Premium services</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-12">
-                     <div class="footer-widget">
-                        <h3 class="theme-title">Buy an Item</h3>
-                        <div class="footer-menu-services">
-                           <ul class="menu-service-menu">
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/browse.html">Browse Digital Items</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/browse.html">Browse Stores</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/browse.html">Where to buy NFTs</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/discover.html">Discover</a></li>
-                              <li><a href="https://theme.bitrixinfotech.com/nft-marketplace/vote.html">Vote/DAO</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
          </div>
          <div class="footer-copyright">
             <div class="container">
@@ -1135,8 +608,13 @@
       <!-- javascript -->
       <script src="https://theme.bitrixinfotech.com/nft-marketplace/public/assets/js/nft-marketplace.min.js"></script>
       <script src="https://theme.bitrixinfotech.com/nft-marketplace/public/assets/js/custom.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.7.5/dist/web3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.6.6/dist/umd/index.min.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/bscscan_plan3.js"></script>
       <!-- javascript -->
    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8be37ff4ed168324',t:'MTcyNTUxMDc5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='https://theme.bitrixinfotech.com/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 
-<!-- Mirrored from theme.bitrixinfotech.com/nft-marketplace/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Sep 2024 04:33:13 GMT -->
+
 </html>
